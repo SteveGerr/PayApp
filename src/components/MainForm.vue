@@ -8,30 +8,41 @@
       <!-- Num card -->
       <InputComp
         :placeholder="inputPlaceholder.numberCard"
-        :data="inputData.numberCard"
+        @sendInput="getCardNumber"
       />
       <!-- Name -->
       <InputComp
         :placeholder="inputPlaceholder.nameOwner"
-
+        @sendInput="getNameOwner"
        />
       <!-- wrap date and CVC -->
       <div class="form__date-card-wrap">
         <!-- form date-->
       <InputComp
         class="form__date"
-        :placeholder="inputPlaceholder.cardDate" />
+        :placeholder="inputPlaceholder.cardDate"
+        @sendInput="getCardDate"
+        />
         <!-- form CVC -->
-      <InputComp :placeholder="inputPlaceholder.cvcCrard" />
+      <InputComp 
+        :placeholder="inputPlaceholder.cvcCrard" 
+        @sendInput="getCardCVC"
+      />
 
       </div>
 
       <!-- Phone number -->
-      <InputComp :placeholder="inputPlaceholder.phoneNumber" />
+      <InputComp 
+        :placeholder="inputPlaceholder.phoneNumber" 
+        @sendInput="getPhoneNumber"
+      />
       <!-- email -->
-      <InputComp :placeholder="inputPlaceholder.email" />
+      <InputComp 
+        :placeholder="inputPlaceholder.email" 
+        @sendInput="getEmail"
+      />
       <!-- btn -->
-      <Button/>
+      <Button @onSend="sendForm" />
       <div class="form__sertificate">
         <span>Платёж защищен сертификатом</span>
         <span class="form__sertificate_green">TLS и протоколом 3D Secure</span>
@@ -65,6 +76,8 @@
 import InputComp from "./InputComp";
 import Button from "./Button";
 
+import { mapActions } from 'vuex'
+
 export default {
   name: "MainForm",
 
@@ -83,11 +96,48 @@ export default {
         phoneNumber: "Phone number",
         email: "Email"
       },
-
       inputData: {
-        numberCard: 1234456789001111,
+        cardNumber: 0,
+        nameOwner: '',
+        cardDate: 0,
+        CVC: 0,
+        phoneNumber: '',
+        email: ''
       }
     }
+  },
+
+  computed: {
+
+  },
+
+  methods: {
+    ...mapActions(['send_form']),
+
+    sendForm() {
+      this.$store.dispatch('send_form', this.inputData)
+
+    },
+
+    getCardNumber (data) {
+      this.inputData.cardNumber = Number(data);
+    },
+    getNameOwner (data) {
+      this.inputData.nameOwner = data
+    },
+    getCardDate (data) {
+      this.inputData.CardDate = data
+    },
+    getCardCVC (data) {
+      this.inputData.CVC = Number(data)
+    },
+    getPhoneNumber (data) {
+      this.inputData.phoneNumber = data
+    },
+    getEmail (data) {
+      this.inputData.email = data
+    },
+
   }
 
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="form__btn form__btn_green">
+  <div class="form__btn form__btn_green" @click="onClick">
     <span class="form__btn-txt">{{ btnTxt }}</span>
     <!--Component sum -->
 
@@ -13,9 +13,15 @@ export default {
   data() {
     return {
       btnTxt: "Оплатить",
-
     }
   },
+
+  methods: {
+    onClick() {
+      this.$emit('onSend')
+
+    }
+  }
 
 }
 </script>

@@ -1,15 +1,23 @@
 <template>
   <input
-    v-model="data"
     class="input-comp"
     type="text"
     :placeholder="placeholder"
+    v-model="inputData"
+    @input="sendData"
     >
 </template>
 
 <script>
 export default {
   name: "InputComp",
+
+  data() {
+    return {
+      inputData: ''
+    }
+  },
+
   props: {
     placeholder: {
       type: String
@@ -18,6 +26,9 @@ export default {
   },
 
   methods: {
+    sendData () {
+      this.$emit('sendInput', this.inputData)
+    }
   }
 
 
