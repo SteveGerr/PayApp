@@ -1,10 +1,10 @@
 <template>
-  <div class="sum">{{totalSum}}</div>
+  <div class="sum">{{totalSum}}$</div>
 </template>
 
 <script>
 export default {
-  name: "Sum",
+  name: "SumTotal",
   props: {
     totalSum: {
       type: Number

@@ -2,12 +2,16 @@
   <div class="form__btn form__btn_green" @click="onClick">
     <span class="form__btn-txt">{{ btnTxt }}</span>
     <!--Component sum -->
-
+    <sum-total :totalSum="cSumTotal"/>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import SumTotal from './SumTotal.vue';
+
 export default {
+  components: { SumTotal },
   name: "Button",
 
   data() {
@@ -20,6 +24,14 @@ export default {
     onClick() {
       this.$emit('onSend')
 
+    }
+  },
+
+  computed: {
+    ...mapState(['data']),
+
+    cSumTotal() {
+      return this.data.sum
     }
   }
 
@@ -42,9 +54,21 @@ export default {
     cursor: pointer;
   }
 
+  .form__btn:hover {
+    cursor: pointer;
+  }
+
+  .form__btn:active {
+    transform: scale(0.9);
+  }
+
   /* Green */
   .form__btn.form__btn_green {
     background: #62b13d;
+  }
+
+  .form__btn-txt {
+    margin-right: 10px;
   }
 
 </style>

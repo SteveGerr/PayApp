@@ -1,8 +1,12 @@
 <template>
   <form class="form">
     <div class="form__header">
-      <div class="form__heading"><img src="../assets/header-icons/pay-icon.png" alt=""> <span>оплата картой</span></div>
+      <div class="form__heading">
+        <img src="../assets/header-icons/pay-icon.png" alt=""> 
+        <span>оплата картой</span>
+      </div>
       <!-- sum component -->
+      <sum-total :totalSum="cDataSum"/>
     </div>
     <div class="form__inputs-wrap">
       <!-- Num card -->
@@ -76,14 +80,16 @@
 import InputComp from "./InputComp";
 import Button from "./Button";
 
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
+import SumTotal from './SumTotal.vue';
 
 export default {
   name: "MainForm",
 
   components: {
     InputComp,
-    Button
+    Button,
+    SumTotal
   },
 
   data() {
@@ -108,7 +114,11 @@ export default {
   },
 
   computed: {
+    ...mapState([ 'data' ]),
 
+    cDataSum() {
+      return this.data.sum
+    }
   },
 
   methods: {
