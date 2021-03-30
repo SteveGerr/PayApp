@@ -11,11 +11,12 @@ export const store = new Vuex.Store({
       count: 0,
       data: {
         sum: 100000,
-      }
+      },
+      dataForm: []
     },
     mutations: {
       [MUTATIONS.SEND_FORM] (state, dataForm) {
-        state.data.push(dataForm)
+        state.dataForm.push(dataForm)
       },
       
     },

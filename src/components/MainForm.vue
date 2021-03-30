@@ -103,6 +103,7 @@ export default {
         email: "Email"
       },
       inputData: {
+        sum: 0,
         cardNumber: 0,
         nameOwner: '',
         cardDate: 0,
@@ -116,7 +117,7 @@ export default {
   computed: {
     ...mapState([ 'data' ]),
 
-    cDataSum() {
+    cDataSum() {     
       return this.data.sum
     }
   },
@@ -148,6 +149,10 @@ export default {
       this.inputData.email = data
     },
 
+  },
+
+  created() {
+    this.inputData.sum = this.cDataSum
   }
 
 }
@@ -165,18 +170,22 @@ export default {
     align-items: center;
     width: 100%;
     max-width: 450px;
-    margin: 0 auto;
+    margin: 60px auto 0;
     background: #fff;
     border: 1px solid #BBBDC2;
     position: relative;
   }
   .form::after {
     max-width: 430px;
-    bottom: -12px;
+    bottom: -13px;
+    background: #fff;
+    border-top: 1px solid #BBBDC2;
+
   }
   .form::before {
     max-width: 410px;
     bottom: -23px;
+    background: #fff;
   }
   .form::after,
   .form::before {
